@@ -15,7 +15,20 @@ export default function NewEventsSection() {
 		// queryKey -> A unique key that identifies this particular query.
 		// This is used by React Query to cache the data and manage the state of the query.
 		queryKey: ["events"],
+		// staleTime -> The amount of time (in milliseconds) that the data fetched by this query will be considered "fresh".
+		// During this time, React Query will return the cached data for this query instead of making a new http request.
+		// This can improve performance and reduce the number of http requests made to the server.
+		// Default is 0 ms, which means that the data will be considered stale immediately after it is fetched.
+		staleTime: 0,
+		// garbage collection time -> The amount of time (in milliseconds) that
+		// the cached data for this query will be kept in memory before it is garbage collected.
+		// This can help to free up memory and prevent memory leaks.Default is 5 minutes (300000 ms).
+		gcTime: 1000,
 	});
+
+	//react query caches the data it fetches, so if the same query is made again,
+	// it can return the cached data instead of making another http request.
+	// This improves performance and reduces the number of http requests made to the server.
 
 	let content;
 
