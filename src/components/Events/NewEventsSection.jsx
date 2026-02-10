@@ -23,7 +23,7 @@ export default function NewEventsSection() {
 		// garbage collection time -> The amount of time (in milliseconds) that
 		// the cached data for this query will be kept in memory before it is garbage collected.
 		// This can help to free up memory and prevent memory leaks.Default is 5 minutes (300000 ms).
-		gcTime: 1000,
+		// gcTime: 1000,
 	});
 
 	//react query caches the data it fetches, so if the same query is made again,
