@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import Modal from "../UI/Modal.jsx";
 import EventForm from "./EventForm.jsx";
-import { createNewEvent } from "../../utils/http.js";
+import { createNewEvent, queryCLient } from "../../utils/http.js";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 
 export default function NewEvent() {
@@ -11,6 +11,10 @@ export default function NewEvent() {
 	//POST request to add new event
 	const { mutate, isError, isLoading, error } = useMutation({
 		mutationFn: createNewEvent,
+		onSuccess: () => {
+			queryCLient.invalidateQueries({ queryKey: ["events"] }); //tell React query that data fetched by certain queries is outdated(invalidating)
+			navigate("/events");
+		}, // will be executed when the mutation is succeded
 	});
 
 	function handleSubmit(formData) {

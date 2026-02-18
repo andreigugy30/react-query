@@ -19,7 +19,7 @@ export default function NewEventsSection() {
 		// During this time, React Query will return the cached data for this query instead of making a new http request.
 		// This can improve performance and reduce the number of http requests made to the server.
 		// Default is 0 ms, which means that the data will be considered stale immediately after it is fetched.
-		staleTime: 0,
+		staleTime: 5000,
 		// garbage collection time -> The amount of time (in milliseconds) that
 		// the cached data for this query will be kept in memory before it is garbage collected.
 		// This can help to free up memory and prevent memory leaks.Default is 5 minutes (300000 ms).

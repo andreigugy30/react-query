@@ -1,3 +1,7 @@
+import { QueryClient } from "@tanstack/react-query";
+
+export const queryCLient = new QueryClient();
+
 export async function fetchEvents({ signal, searchTerm }) {
 	console.log("🚀 ~ fetchEvents ~ searchTerm:", searchTerm);
 	let url = "http://localhost:3000/events";
