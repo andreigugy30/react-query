@@ -60,9 +60,9 @@ export async function fetchSelectableImages({ params }) {
 	return images;
 }
 
-export async function fetchEventId({ id, params }) {
+export async function fetchEventId({ id, signal }) {
 	const response = await fetch(`http://localhost:3000/events/${id}`, {
-		params,
+		signal,
 	});
 
 	const { event } = await response.json();
@@ -84,6 +84,25 @@ export async function deleteEvent({ id }) {
 
 	if (!response.ok) {
 		const error = new Error("An error occured while deleting the event");
+		error.code = response.status;
+		error.info = data;
+		throw error;
+	}
+
+	return response.json();
+}
+
+export async function updateEvent({ id, event }) {
+	const response = await fetch(`http://localhost:3000/events/${id}`, {
+		method: "PUT",
+		body: JSON.stringify({ event }),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	if (!response.ok) {
+		const error = new Error("An error occured while creating an event");
 		error.code = response.status;
 		error.info = data;
 		throw error;
