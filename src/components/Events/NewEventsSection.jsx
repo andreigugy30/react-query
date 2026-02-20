@@ -11,10 +11,10 @@ export default function NewEventsSection() {
 	const { data, isError, isPending, error } = useQuery({
 		// queryFn -> Define the actual code that will send the http request to fetch the recently added events.
 		// This function will be called by the useQuery hook when it needs to fetch the data.
-		queryFn: fetchEvents,
+		queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
 		// queryKey -> A unique key that identifies this particular query.
 		// This is used by React Query to cache the data and manage the state of the query.
-		queryKey: ["events"],
+		queryKey: ["events", { max: 3 }],
 		// staleTime -> The amount of time (in milliseconds) that the data fetched by this query will be considered "fresh".
 		// During this time, React Query will return the cached data for this query instead of making a new http request.
 		// This can improve performance and reduce the number of http requests made to the server.
